@@ -3,7 +3,6 @@ import estrapade.{TestApp, test}
 import language.experimental.macros
 import MagnoliaEncoder.genEncoder
 import io.circe.Encoder
-import io.circe.Encoder._
 
 case class Recursive(field: Int, recursion: List[Recursive])
 
@@ -32,14 +31,6 @@ object CirceRecursiveTypeTest extends TestApp {
 
   def tests(): Unit = {
 
-    val encoder = Encoder[Recursive]
-    test("Use available encoders while descending into a recursive type") {
-      encoder(Recursive(1, List(Recursive(2, Nil), Recursive(3, Nil))))
-    }
-      .assert(
-        j => j.asObject.flatMap(_ ("recursion")).exists(_.isArray),
-        _.toString()
-      )
     val encoderl = Encoder[List[Recursive]]
     test("Use available encoders for an immutable list") {
       encoderl(List(Recursive(1, List(Recursive(2, Nil), Recursive(3, Nil)))))

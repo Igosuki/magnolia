@@ -69,7 +69,7 @@ lazy val tests = project
       // Specifically to import XML stuff that got modularised
       "javax.xml.bind" % "jaxb-api" % "2.3.0" % "compile",
       "com.sun.xml.bind" % "jaxb-impl" % "2.3.0" % "compile",
-      "io.circe" %% "circe-core" % "0.9.3"
+      "io.circe" %% "circe-core" % "0.11.1"
     )
   )
   .dependsOn(examplesJVM)
